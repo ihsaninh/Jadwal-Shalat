@@ -1,8 +1,9 @@
-<?php 
+<?php
 require_once 'logic.php';
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,6 +16,7 @@ require_once 'logic.php';
 
 	<title>Jadwal Sholat</title>
 </head>
+
 <body>
 	<div class="container">
 		<!-- header -->
@@ -68,8 +70,8 @@ require_once 'logic.php';
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach($dataMonthly['results']['datetime'] as $result): ?>
-									<?php if ($thisDate == $result['date']['gregorian']): ?>
+								<?php foreach ($dataMonthly['results']['datetime'] as $result) : ?>
+									<?php if ($thisDate == $result['date']['gregorian']) : ?>
 										<tr class="datenow">
 											<td><?= strftime("%a %d %B", strtotime($result['date']['gregorian'])); ?></td>
 											<td><?= strftime("%H:%M", strtotime($result['times']['Imsak'])); ?></td>
@@ -79,100 +81,101 @@ require_once 'logic.php';
 											<td><?= strftime("%H:%M", strtotime($result['times']['Maghrib'])); ?></td>
 											<td><?= strftime("%H:%M", strtotime($result['times']['Isha'])); ?></td>
 										</tr>
-										<?php else:  ?>
-											<tr>
-												<td><?= strftime("%a %d %B", strtotime($result['date']['gregorian'])); ?></td>
-												<td><?= strftime("%H:%M", strtotime($result['times']['Imsak'])); ?></td>
-												<td><?= strftime("%H:%M", strtotime($result['times']['Fajr'])); ?></td>
-												<td><?= strftime("%H:%M", strtotime($result['times']['Dhuhr'])); ?></td>
-												<td><?= strftime("%H:%M", strtotime($result['times']['Asr'])); ?></td>
-												<td><?= strftime("%H:%M", strtotime($result['times']['Maghrib'])); ?></td>
-												<td><?= strftime("%H:%M", strtotime($result['times']['Isha'])); ?></td>
-											</tr>
-										<?php endif; ?>
-									<?php endforeach; ?>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card">
-						<div class="card-body">
-							<div class="jam text-center"></div>
-						</div>
-					</div>
-					<div class="card mt-2">
-						<div class="card-header">
-							<h5>Waktu Sholat di <?= $dataMonthly['results']['location']['city']; ?></h5>
-							<small class="font-weight-bold">Hari ini <?= strftime("%d %B %G", strtotime($dataDaily['results']['datetime'][0]['date']['gregorian'])); ?></small>
-						</div>
-						<div class="card-body">
-							<table class="table">
-								<tr>
-									<td>Imsak</td>
-									<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Imsak'])); ?></td>
-								</tr>
-								<tr>
-									<td>Subuh</td>
-									<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Fajr'])); ?></td>
-								</tr>
-								<tr>
-									<td>Dzuhur</td>
-									<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Dhuhr'])); ?></td>
-								</tr>
-								<tr>
-									<td>Ashar</td>
-									<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Asr'])); ?></td>
-								</tr>
-								<tr>
-									<td>Maghrib</td>
-									<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Maghrib'])); ?></td>
-								</tr>
-								<tr>
-									<td>Isya</td>
-									<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Isha'])); ?></td>
-								</tr>
-							</table>
-						</div>
+									<?php else :  ?>
+										<tr>
+											<td><?= strftime("%a %d %B", strtotime($result['date']['gregorian'])); ?></td>
+											<td><?= strftime("%H:%M", strtotime($result['times']['Imsak'])); ?></td>
+											<td><?= strftime("%H:%M", strtotime($result['times']['Fajr'])); ?></td>
+											<td><?= strftime("%H:%M", strtotime($result['times']['Dhuhr'])); ?></td>
+											<td><?= strftime("%H:%M", strtotime($result['times']['Asr'])); ?></td>
+											<td><?= strftime("%H:%M", strtotime($result['times']['Maghrib'])); ?></td>
+											<td><?= strftime("%H:%M", strtotime($result['times']['Isha'])); ?></td>
+										</tr>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
-			<!-- footer -->
-			<div class="row">
-				<div class="col">
-					<hr>
-					<footer>
-						<p class="text-center copy">Copyright &copy; 2019 Ihsan Nurul Habib</p>
-					</footer>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body">
+						<div class="jam text-center"></div>
+					</div>
+				</div>
+				<div class="card mt-2">
+					<div class="card-header">
+						<h5>Waktu Sholat di <?= $dataMonthly['results']['location']['city']; ?></h5>
+						<small class="font-weight-bold">Hari ini <?= strftime("%d %B %G", strtotime($dataDaily['results']['datetime'][0]['date']['gregorian'])); ?></small>
+					</div>
+					<div class="card-body">
+						<table class="table">
+							<tr>
+								<td>Imsak</td>
+								<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Imsak'])); ?></td>
+							</tr>
+							<tr>
+								<td>Subuh</td>
+								<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Fajr'])); ?></td>
+							</tr>
+							<tr>
+								<td>Dzuhur</td>
+								<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Dhuhr'])); ?></td>
+							</tr>
+							<tr>
+								<td>Ashar</td>
+								<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Asr'])); ?></td>
+							</tr>
+							<tr>
+								<td>Maghrib</td>
+								<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Maghrib'])); ?></td>
+							</tr>
+							<tr>
+								<td>Isya</td>
+								<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Isha'])); ?></td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
+		<!-- footer -->
+		<div class="row">
+			<div class="col">
+				<hr>
+				<footer>
+					<p class="text-center copy">Copyright &copy; 2019 Ihsan Nurul Habib</p>
+				</footer>
+			</div>
+		</div>
+	</div>
 
-		<!-- Optional JavaScript -->
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-		<script src="assets/vendor/jquery/jquery.min.js"></script>
-		<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-		<!-- Core plugin JavaScript-->
-		<script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-		<!-- Custom scripts for all pages-->
-		<script src="assets/js/sb-admin-2.min.js"></script>
-		<script>
-			function jam() {
-				const time = new Date(),
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="assets/vendor/jquery/jquery.min.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Core plugin JavaScript-->
+	<script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+	<!-- Custom scripts for all pages-->
+	<script src="assets/js/sb-admin-2.min.js"></script>
+	<script>
+		function jam() {
+			const time = new Date(),
 				hours = time.getHours(),
 				minutes = time.getMinutes(),
 				seconds = time.getSeconds();
-				document.querySelector('.jam').innerHTML = addNol(hours) + ":" + addNol(minutes) + ":" + addNol(seconds);
+			document.querySelector('.jam').innerHTML = addNol(hours) + ":" + addNol(minutes) + ":" + addNol(seconds);
 
-				function addNol(e) {
-					if (e < 10) {
-						e = '0' + e
-					}
-					return e;
+			function addNol(e) {
+				if (e < 10) {
+					e = '0' + e
 				}
+				return e;
 			}
-			setInterval(jam, 1000);
-		</script>
-	</body>
-	</html>
+		}
+		setInterval(jam, 1000);
+	</script>
+</body>
+
+</html>
