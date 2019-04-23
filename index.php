@@ -1,5 +1,17 @@
 <?php
-require_once 'logic.php';
+require_once 'curl.php';
+
+$thisMonth = date('Y-m');
+$thisDate = date('Y-m-d');
+
+if (isset($_POST['submit'])) {
+	setlocale(LC_ALL, 'id_ID');
+	$lokasi = $_POST['lokasi'];
+	$dataMonthly = json_decode(getCurl('https://api.pray.zone/v2/times/this_month.json?city=' . $lokasi . '&month=' . $thisMonth . '&school=10'), true);
+} else {
+	$dataMonthly = json_decode(getCurl('https://api.pray.zone/v2/times/this_month.json?city=bogor&month=' . $thisMonth .  '&school=10'), true);
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,7 +23,6 @@ require_once 'logic.php';
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Orbitron:400,700" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/style.css">
 
 	<title>Jadwal Sholat</title>
@@ -107,34 +118,38 @@ require_once 'logic.php';
 				<div class="card mt-2">
 					<div class="card-header">
 						<h5>Waktu Sholat di <?= $dataMonthly['results']['location']['city']; ?></h5>
-						<small class="font-weight-bold">Hari ini <?= strftime("%d %B %G", strtotime($dataDaily['results']['datetime'][0]['date']['gregorian'])); ?></small>
+						<small class="font-weight-bold">Hari ini <?= date('d M Y') ?></small>
 					</div>
 					<div class="card-body">
 						<table class="table">
-							<tr>
-								<td>Imsak</td>
-								<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Imsak'])); ?></td>
-							</tr>
-							<tr>
-								<td>Subuh</td>
-								<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Fajr'])); ?></td>
-							</tr>
-							<tr>
-								<td>Dzuhur</td>
-								<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Dhuhr'])); ?></td>
-							</tr>
-							<tr>
-								<td>Ashar</td>
-								<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Asr'])); ?></td>
-							</tr>
-							<tr>
-								<td>Maghrib</td>
-								<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Maghrib'])); ?></td>
-							</tr>
-							<tr>
-								<td>Isya</td>
-								<td><?= strftime("%H:%M", strtotime($dataDaily['results']['datetime'][0]['times']['Isha'])); ?></td>
-							</tr>
+							<?php foreach ($dataMonthly['results']['datetime'] as $result) : ?>
+								<?php if ($thisDate == $result['date']['gregorian']) : ?>
+									<tr>
+										<td>Imsak</td>
+										<td><?= strftime("%H:%M", strtotime($result['times']['Imsak'])); ?></td>
+									</tr>
+									<tr>
+										<td>Subuh</td>
+										<td><?= strftime("%H:%M", strtotime($result['times']['Fajr'])); ?></td>
+									</tr>
+									<tr>
+										<td>Dzuhur</td>
+										<td><?= strftime("%H:%M", strtotime($result['times']['Dhuhr'])); ?></td>
+									</tr>
+									<tr>
+										<td>Ashar</td>
+										<td><?= strftime("%H:%M", strtotime($result['times']['Asr'])); ?></td>
+									</tr>
+									<tr>
+										<td>Maghrib</td>
+										<td><?= strftime("%H:%M", strtotime($result['times']['Maghrib'])); ?></td>
+									</tr>
+									<tr>
+										<td>Isya</td>
+										<td><?= strftime("%H:%M", strtotime($result['times']['Isha'])); ?></td>
+									</tr>
+								<?php endif; ?>
+							<?php endforeach; ?>
 						</table>
 					</div>
 				</div>
