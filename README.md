@@ -11,3 +11,9 @@ Aplikasi web ini dibuat dengan PHP dengan menggunakan API dari https://prayertim
 3. Jam digital
 4. Pencarian kota atau daerah secara manual
 5. Sorting perdasarkan mingguan atau bulanan (COMING SOON)
+
+## Screenshoot
+
+<div align="center">
+  <img src="https://github.com/ihsaninh/Jadwal-Shalat/blob/master/SS.png">  
+</div>
