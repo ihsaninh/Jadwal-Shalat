@@ -2,7 +2,7 @@
 
 ## Tentang aplikasi web ini
 
-Aplikasi web ini dibuat dengan PHP dengan menggunakan API dari https://prayertimes.date yang dapat menyesuaikan hari berdasarkan harian, mingguan, dan bulanan.
+Aplikasi web ini dibuat dengan PHP dengan menggunakan API dari https://prayertimes.date yang dapat menyesuaikan hari berdasarkan harian, mingguan, dan bulanan. Untuk hasil dapat dilihat di link https://prayertimesid.herokuapp.com.
 
 ## Fitur-fitur
 
